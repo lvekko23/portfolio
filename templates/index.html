@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Valentino Ciancio | Desarrollador Web</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;500;700&display=swap" rel="stylesheet">
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+
+    <style>
+        :root {
+            --bg-color: #0a0a0a;
+            --text-color: #e0e0e0;
+            --accent: #00f2ff; /* Celeste Neón */
+            --secondary: #1f1f1f;
+        }
+
+        body { font-family: 'Space Grotesk', sans-serif; background-color: var(--bg-color); color: var(--text-color); }
+        
+        /* NAVBAR */
+        .navbar { background-color: rgba(10, 10, 10, 0.9); backdrop-filter: blur(10px); border-bottom: 1px solid #333; }
+        .navbar-brand { font-weight: 700; color: white !important; letter-spacing: 1px; text-transform: uppercase; }
+        .nav-link { color: #aaa !important; transition: 0.3s; }
+        .nav-link:hover, .nav-link.active { color: var(--accent) !important; }
+        .btn-contact { border: 1px solid var(--accent); color: var(--accent); border-radius: 0; padding: 8px 25px; transition: 0.3s; font-weight: 700; text-decoration: none; }
+        .btn-contact:hover { background: var(--accent); color: black; box-shadow: 0 0 15px var(--accent); }
+
+        /* HERO SECTION */
+        .hero { height: 90vh; display: flex; align-items: center; justify-content: center; text-align: center; background: radial-gradient(circle at center, #1a1a1a 0%, #000 100%); }
+        .hero h1 { font-size: 3.5rem; font-weight: 700; margin-bottom: 20px; }
+        .hero span { color: var(--accent); }
+        .hero p { font-size: 1.2rem; color: #888; max-width: 600px; margin: 0 auto 40px; }
+        
+        /* PROYECTOS */
+        .project-card { background: var(--secondary); border: 1px solid #333; transition: 0.3s; overflow: hidden; }
+        .project-card:hover { transform: translateY(-5px); border-color: var(--accent); }
+        .project-img { height: 200px; background-color: #333; background-size: cover; background-position: top; }
+        
+        /* SERVICIOS */
+        .service-box { padding: 40px 20px; border: 1px solid #333; height: 100%; transition: 0.3s; background: var(--bg-color); }
+        .service-box:hover { border-color: var(--accent); background: var(--secondary); }
+        .service-icon { font-size: 2.5rem; color: var(--accent); margin-bottom: 20px; }
+
+        /* FOOTER */
+        footer { border-top: 1px solid #333; padding: 40px 0; text-align: center; color: #666; }
+        .social-link { color: white; font-size: 1.5rem; margin: 0 15px; transition: 0.3s; }
+        .social-link:hover { color: var(--accent); }
+
+        /* Botón Flotante WhatsApp */
+        .whatsapp-float { position: fixed; bottom: 30px; right: 30px; background: #25d366; color: white; width: 60px; height: 60px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 30px; z-index: 100; box-shadow: 0 0 20px rgba(37, 211, 102, 0.4); text-decoration: none; transition: 0.3s; }
+        .whatsapp-float:hover { transform: scale(1.1); background: #20b852; }
+    </style>
+</head>
+<body>
+
+    <nav class="navbar navbar-expand-lg fixed-top">
+        <div class="container">
+            <a class="navbar-brand" href="#">VALENTINO CIANCIO</a>
+            <button class="navbar-toggler border-0 bg-secondary" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="fa-solid fa-bars text-white"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto align-items-center">
+                    <li class="nav-item"><a class="nav-link" href="#proyectos">Proyectos</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#servicios">Servicios</a></li>
+                    <li class="nav-item ms-3"><a class="btn-contact" href="https://wa.me/5492323357985" target="_blank">CONTACTAR</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <section class="hero">
+        <div class="container" data-aos="fade-up">
+            <h1>Desarrollo Web <br><span>Rápido & A Medida</span></h1>
+            <p>Ayudo a negocios y profesionales a tener una presencia digital sólida. Sin plantillas pesadas, solo código limpio y eficiente.</p>
+            <div class="d-flex gap-3 justify-content-center">
+                <a href="#proyectos" class="btn btn-light px-4 py-2 rounded-0 fw-bold">VER MI TRABAJO</a>
+                <a href="https://wa.me/5492323357985" target="_blank" class="btn btn-contact px-4 py-2 rounded-0 fw-bold">COTIZAR WEB</a>
+            </div>
+        </div>
+    </section>
+
+    <section id="proyectos" class="py-5">
+        <div class="container py-5">
+            <h6 class="text-uppercase ls-2 mb-2" style="color: var(--accent);">Portfolio</h6>
+            <h2 class="mb-5 fw-bold">Últimos Proyectos</h2>
+
+            <div class="row">
+                <div class="col-lg-8 mx-auto" data-aos="fade-up">
+                    <div class="project-card p-0 row g-0 align-items-center">
+                        <div class="col-md-7">
+                            <div class="project-img" style="background-image: url('/static/indumar.jpg'); height: 350px;"></div>
+                        </div>
+                        <div class="col-md-5 p-4">
+                            <h3 class="fw-bold text-white">INDUMAR S.A.</h3>
+                            <p class="text-secondary small mb-3">Ingeniería & Montajes</p>
+                            <p class="text-secondary">Desarrollo Full Stack a medida. Sistema de catálogo autoadministrable y bot de contacto automatizado.</p>
+                            <div class="mb-4">
+                                <span class="badge border border-secondary text-light fw-normal me-1">Python</span>
+                                <span class="badge border border-secondary text-light fw-normal me-1">Flask</span>
+                                <span class="badge border border-secondary text-light fw-normal me-1">Bootstrap</span>
+                            </div>
+                            <a href="https://indumar.com.ar" target="_blank" class="btn btn-outline-light rounded-0 w-100">VISITAR SITIO <i class="fa-solid fa-arrow-up-right-from-square ms-2"></i></a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="servicios" class="py-5 bg-darker">
+        <div class="container py-5">
+            <h2 class="mb-5 fw-bold text-center">¿Qué puedo hacer por vos?</h2>
+            <div class="row g-4">
+                <div class="col-md-4" data-aos="fade-up" data-aos-delay="0">
+                    <div class="service-box text-center">
+                        <i class="fa-solid fa-laptop-code service-icon"></i>
+                        <h4 class="fw-bold mb-3 text-white">Web Institucional</h4>
+                        <p class="text-secondary">Tu negocio abierto 24/7. Diseño moderno, adaptado a celulares y optimizado para aparecer en Google.</p>
+                    </div>
+                </div>
+                <div class="col-md-4" data-aos="fade-up" data-aos-delay="100">
+                    <div class="service-box text-center">
+                        <i class="fa-solid fa-bolt service-icon"></i>
+                        <h4 class="fw-bold mb-3 text-white">Landing Pages</h4>
+                        <p class="text-secondary">Páginas de una sola sección diseñadas exclusivamente para vender o captar clientes en campañas de publicidad.</p>
+                    </div>
+                </div>
+                <div class="col-md-4" data-aos="fade-up" data-aos-delay="200">
+                    <div class="service-box text-center">
+                        <i class="fa-brands fa-python service-icon"></i>
+                        <h4 class="fw-bold mb-3 text-white">Desarrollo a Medida</h4>
+                        <p class="text-secondary">¿Necesitás algo específico? Programo soluciones personalizadas en Python sin depender de plantillas.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="contacto" class="py-5 text-center">
+        <div class="container py-5" data-aos="zoom-in">
+            <h2 class="display-5 fw-bold mb-4">Empecemos tu proyecto</h2>
+            <p class="lead text-secondary mb-5">Contame tu idea y te paso un presupuesto sin compromiso.</p>
+            <a href="https://wa.me/5492323357985" target="_blank" class="btn btn-contact px-5 py-3 fs-5 fw-bold rounded-0">
+                <i class="fa-brands fa-whatsapp me-2"></i> ESCRIBIME AL WHATSAPP
+            </a>
+        </div>
+    </section>
+
+    <footer>
+        <div class="container">
+            <div class="mb-4">
+                <a href="https://github.com/lvekko23" target="_blank" class="social-link"><i class="fa-brands fa-github"></i></a>
+                <a href="mailto:valentinociancio7@gmail.com" class="social-link"><i class="fa-solid fa-envelope"></i></a>
+            </div>
+            <p class="small mb-0">© 2026 Valentino Ciancio. Todos los derechos reservados.</p>
+        </div>
+    </footer>
+
+    <a href="https://wa.me/5492323357985" class="whatsapp-float" target="_blank">
+        <i class="fa-brands fa-whatsapp"></i>
+    </a>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script> AOS.init(); </script>
+</body>
+</html>
