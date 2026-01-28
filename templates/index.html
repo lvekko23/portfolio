@@ -61,9 +61,29 @@
         .social-link:hover { color: var(--accent); opacity: 1; transform: scale(1.2); }
 
         /* Whatsapp Flotante */
-        .whatsapp-float { position: fixed; bottom: 30px; right: 30px; background: #25d366; color: white; width: 60px; height: 60px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 30px; z-index: 100; box-shadow: 0 0 20px rgba(37, 211, 102, 0.4); text-decoration: none; transition: 0.3s; }
-        .whatsapp-float:hover { transform: scale(1.1); background: #20b852; }
-
+        
+.whatsapp-float {
+    position: fixed;
+    bottom: 30px;
+    left: 30px; 
+    background-color: #25d366;
+    color: white;
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    text-align: center;
+    font-size: 30px;
+    box-shadow: 2px 2px 3px #999;
+    z-index: 100;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-decoration: none;
+    transition: 0.3s;
+}
+.whatsapp-float:hover {
+    transform: scale(1.1);
+}
         @media (max-width: 768px) {
             .hero h1 { font-size: 2.5rem; }
             .project-img { height: 250px; }
@@ -241,5 +261,93 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
     <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
     <script> AOS.init({ duration: 800, once: true }); </script>
+    <div id="chat-widget">
+        <button id="chat-btn" onclick="toggleChat()">
+            <i class="fa-solid fa-robot"></i> Chat IA
+        </button>
+
+        <div id="chat-window" class="d-none">
+            <div class="chat-header">
+                <span>🤖 ValenBot</span>
+                <button onclick="toggleChat()" class="btn-close-chat"><i class="fa-solid fa-xmark"></i></button>
+            </div>
+            <div id="chat-messages" class="chat-body">
+                <div class="bot-msg">¡Hola! Soy la IA de Valentino. ¿En qué te ayudo?</div>
+            </div>
+            <div class="chat-input-area">
+                <input type="text" id="user-input" placeholder="Escribí acá..." onkeypress="handleEnter(event)">
+                <button onclick="sendMessage()"><i class="fa-solid fa-paper-plane"></i></button>
+            </div>
+        </div>
+    </div>
+
+    <style>
+        /* ESTILOS DEL CHAT (A la DERECHA) */
+        #chat-widget { position: fixed; bottom: 30px; right: 30px; z-index: 9999; font-family: sans-serif; }
+        
+        #chat-btn {
+            background: #00f2ff; color: black; border: none; padding: 15px 25px;
+            border-radius: 50px; font-weight: bold; cursor: pointer;
+            box-shadow: 0 4px 15px rgba(0, 242, 255, 0.4); 
+            display: flex; align-items: center; gap: 10px; font-size: 1rem;
+        }
+        #chat-btn:hover { transform: scale(1.05); }
+
+        #chat-window {
+            width: 300px; height: 400px; background: #1a1a1a; border: 1px solid #333;
+            border-radius: 15px; display: flex; flex-direction: column;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.8); margin-bottom: 15px;
+        }
+        .d-none { display: none !important; }
+
+        .chat-header { background: #222; padding: 15px; display: flex; justify-content: space-between; color: white; border-bottom: 1px solid #333; font-weight: bold; }
+        .chat-body { flex: 1; padding: 15px; overflow-y: auto; display: flex; flex-direction: column; gap: 10px; font-size: 0.9rem; }
+        
+        .bot-msg { align-self: flex-start; background: #333; color: #ddd; padding: 10px; border-radius: 10px 10px 10px 0; max-width: 80%; }
+        .user-msg { align-self: flex-end; background: #00f2ff; color: #000; padding: 10px; border-radius: 10px 10px 0 10px; max-width: 80%; }
+
+        .chat-input-area { padding: 10px; background: #222; display: flex; gap: 10px; border-top: 1px solid #333; }
+        .chat-input-area input { flex: 1; background: #111; border: 1px solid #444; color: white; padding: 10px; border-radius: 5px; outline: none; }
+        .chat-input-area button { background: #00f2ff; border: none; width: 40px; height: 40px; border-radius: 50%; cursor: pointer; display: flex; align-items: center; justify-content: center; }
+        .btn-close-chat { background: none; border: none; color: #ccc; cursor: pointer; font-size: 1.2rem; }
+    </style>
+
+    <script>
+        function toggleChat() { document.getElementById('chat-window').classList.toggle('d-none'); }
+        function handleEnter(e) { if (e.key === 'Enter') sendMessage(); }
+
+        async function sendMessage() {
+            const input = document.getElementById('user-input');
+            const msgs = document.getElementById('chat-messages');
+            const text = input.value;
+            if (!text) return;
+
+            msgs.innerHTML += `<div class="user-msg">${text}</div>`;
+            input.value = '';
+            msgs.scrollTop = msgs.scrollHeight;
+
+            const loadingId = "load-" + Date.now();
+            msgs.innerHTML += `<div class="bot-msg" id="${loadingId}">...</div>`;
+
+            try {
+                const res = await fetch('/chat', {
+                    method: 'POST',
+                    headers: {'Content-Type': 'application/json'},
+                    body: JSON.stringify({ message: text })
+                });
+                const data = await res.json();
+                document.getElementById(loadingId).remove();
+                
+                // Formatear respuesta (negritas y saltos)
+                let cleanText = data.response.replace(/\*\*(.*?)\*\*/g, '<b>$1</b>'); // Negritas
+                cleanText = cleanText.replace(/\n/g, '<br>'); // Saltos de linea
+                
+                msgs.innerHTML += `<div class="bot-msg">${cleanText}</div>`;
+            } catch (e) {
+                document.getElementById(loadingId).innerText = "Error de conexión.";
+            }
+            msgs.scrollTop = msgs.scrollHeight;
+        }
+    </script>
 </body>
 </html>
