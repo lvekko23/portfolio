@@ -5,7 +5,7 @@ import os
 app = Flask(__name__)
 
 # ---  CLAVE API ---
-API_KEY = "AIzaSyCJb_loDx_uCgKcRmS5o5Eh7G7frKv5Ibo"
+API_KEY = os.environ.get('API_KEY')
 
 # Configuramos la IA
 try:
