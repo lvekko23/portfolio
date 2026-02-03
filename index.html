@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Valentino Ciancio | Portfolio</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="static/style.css">
+</head>
+<body>
+
+    <nav>
+        <div class="logo">VALENTINO<span>.DEV</span></div>
+        <ul class="nav-links">
+            <li><a href="#hero">Inicio</a></li>
+            <li><a href="#halfvibe" style="color: #00f2ff;">Jugar HalfVibe</a></li>
+            <li><a href="#projects">Proyectos</a></li>
+            <li><a href="#contact">Contacto</a></li>
+        </ul>
+    </nav>
+
+    <section id="hero" class="hero">
+        <div class="hero-content">
+            <span class="badge">OPEN TO WORK</span>
+            <h1>Hola, soy <span class="highlight">Valentino Ciancio</span></h1>
+            <h2>Full Stack Developer & AI Engineer</h2>
+            <p>Especialista en desarrollo web moderno, soluciones para PyMEs y motores de físicas en el navegador.</p>
+            <div class="cta-buttons">
+                <a href="#halfvibe" class="btn primary">Probar mi Motor de Físicas</a>
+                <a href="#projects" class="btn secondary">Ver Clientes</a>
+            </div>
+        </div>
+    </section>
+
+    <section id="halfvibe" class="halfvibe-section">
+        <div class="container">
+            <div class="section-title">
+                <span class="subtitle-badge">PROYECTO DESTACADO</span>
+                <h2>🚀 HalfVibe: Physics Engine</h2>
+                <p>Motor de físicas estilo "Source" corriendo en el navegador. <br>Incluye base de datos en tiempo real y leaderboard global.</p>
+            </div>
+            <div class="game-console">
+                <div class="server-status"><span class="dot"></span> LIVE SERVER (PythonAnywhere)</div>
+                <iframe src="https://lvekko.pythonanywhere.com" title="HalfVibe Game" allow="pointer-lock" loading="lazy"></iframe>
+            </div>
+            <div class="game-info">
+                <div class="tech-stack">
+                    <span class="tech-pill"><i class="fa-brands fa-python"></i> Flask</span>
+                    <span class="tech-pill"><i class="fa-brands fa-js"></i> Three.js</span>
+                    <span class="tech-pill"><i class="fa-solid fa-database"></i> SQLite</span>
+                </div>
+                <a href="https://lvekko.pythonanywhere.com" target="_blank" class="btn-fullscreen">
+                    Jugar en Pantalla Completa <i class="fa-solid fa-arrow-up-right-from-square"></i>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <section id="projects" class="projects">
+        <h2>Proyectos y Clientes</h2>
+        <div class="grid">
+            <div class="card">
+                <div class="card-img-container"><img src="static/indumar.jpg" alt="Indumar Web"></div>
+                <div class="card-content">
+                    <h3>INDUMAR Ingeniería</h3>
+                    <p>Sitio web corporativo para empresa de mantenimiento industrial.</p>
+                    <div class="tags"><span>HTML5</span><span>CSS3</span><span>JS</span></div>
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="card-img-container"><img src="static/sga.jpg" alt="SGA Web"></div>
+                <div class="card-content">
+                    <h3>SGA Fumigaciones</h3>
+                    <p>Landing page optimizada para conversión y contacto rápido.</p>
+                    <div class="tags"><span>Landing Page</span><span>UX/UI</span></div>
+                </div>
+            </div>
+
+            <div class="card" style="border-color: #00f2ff;">
+                <div class="card-icon-placeholder"><i class="fa-solid fa-robot"></i></div>
+                <div class="card-content">
+                    <h3>AI Assistant</h3>
+                    <p>Chatbot inteligente conectado al servidor en tiempo real.</p>
+                    <div class="tags"><span>Python API</span><span>IA</span></div>
+                    <button onclick="toggleChat()" class="btn-card" style="width:100%; border:none; cursor:pointer;">Abrir Chat</button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <div id="chat-window" class="chat-window hidden">
+        <div class="chat-header">
+            <span>Asistente Valentino</span>
+            <button onclick="toggleChat()" class="close-chat">X</button>
+        </div>
+        <div id="chat-messages" class="chat-messages">
+            <div class="message bot">Hola 👋 Soy la IA de Valen. ¿En qué te ayudo?</div>
+        </div>
+        <div class="chat-input-area">
+            <input type="text" id="user-input" placeholder="Escribí acá..." onkeypress="handleEnter(event)">
+            <button onclick="sendMessage()"><i class="fa-solid fa-paper-plane"></i></button>
+        </div>
+    </div>
+
+    <a href="https://wa.me/5492323357985" class="whatsapp-float" target="_blank">
+        <i class="fa-brands fa-whatsapp"></i>
+    </a>
+
+    <footer id="contact">
+        <h2>¿Tenés un proyecto?</h2>
+        <div class="socials">
+            <a href="https://www.linkedin.com/in/valentino-ciancio-443a163a8/" target="_blank"><i class="fa-brands fa-linkedin"></i> LinkedIn</a>
+            <a href="mailto:ekkito27@gmail.com"><i class="fa-solid fa-envelope"></i> Email</a>
+        </div>
+        <p class="copyright">© 2026 Valentino Ciancio.</p>
+    </footer>
+
+    <script>
+        function toggleChat() {
+            document.getElementById('chat-window').classList.toggle('hidden');
+        }
+
+        function handleEnter(e) {
+            if (e.key === 'Enter') sendMessage();
+        }
+
+        async function sendMessage() {
+            const input = document.getElementById('user-input');
+            const messages = document.getElementById('chat-messages');
+            const msg = input.value;
+            if (!msg) return;
+
+            // Mostrar mensaje usuario
+            messages.innerHTML += `<div class="message user">${msg}</div>`;
+            input.value = '';
+            messages.scrollTop = messages.scrollHeight;
+
+            // Conectar con PythonAnywhere
+            try {
+                const response = await fetch('https://lvekko.pythonanywhere.com/api/chat', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ message: msg })
+                });
+                const data = await response.json();
+                
+                // Mostrar respuesta IA
+                messages.innerHTML += `<div class="message bot">${data.reply}</div>`;
+            } catch (error) {
+                messages.innerHTML += `<div class="message bot" style="color:red">Error: El servidor no responde.</div>`;
+            }
+            messages.scrollTop = messages.scrollHeight;
+        }
+    </script>
+</body>
+</html>
