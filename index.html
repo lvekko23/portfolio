@@ -3,155 +3,334 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Valentino Ciancio | Portfolio</title>
+    <title>Valentino Ciancio | Full-Stack Developer</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <link rel="stylesheet" href="static/style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;600;700&display=swap" rel="stylesheet">
+    
+    <style>
+        :root {
+            --bg-dark: #0a0a0a;
+            --bg-card: #141414;
+            --text-main: #e0e0e0;
+            --text-muted: #888888;
+            --neon-accent: #00ff66; /* Verde técnico/Ciberseguridad */
+            --neon-glow: rgba(0, 255, 102, 0.3);
+        }
+
+        body {
+            background-color: var(--bg-dark);
+            color: var(--text-main);
+            font-family: 'Space Grotesk', sans-serif;
+            overflow-x: hidden;
+        }
+
+        /* --- NAVBAR --- */
+        .navbar {
+            background-color: rgba(10, 10, 10, 0.9) !important;
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid rgba(255,255,255,0.05);
+        }
+        .navbar-brand {
+            font-weight: 700;
+            color: var(--text-main) !important;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+        }
+        .navbar-brand span { color: var(--neon-accent); }
+        .nav-link { color: var(--text-muted) !important; text-transform: uppercase; font-size: 0.85rem; letter-spacing: 1px; transition: 0.3s; }
+        .nav-link:hover { color: var(--neon-accent) !important; }
+
+        /* --- HERO SECTION --- */
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            position: relative;
+            background: radial-gradient(circle at center, #1a1a1a 0%, var(--bg-dark) 100%);
+        }
+        .hero-title {
+            font-size: 4.5rem;
+            font-weight: 700;
+            line-height: 1.1;
+            margin-bottom: 20px;
+            color: white;
+        }
+        .hero-title span {
+            color: var(--neon-accent);
+            text-shadow: 0 0 20px var(--neon-glow);
+        }
+        .hero-subtitle {
+            font-size: 1.2rem;
+            color: var(--text-muted);
+            max-width: 600px;
+            font-weight: 300;
+        }
+
+        /* --- BOTONES NEÓN --- */
+        .btn-neon {
+            background: transparent;
+            color: var(--neon-accent);
+            border: 1px solid var(--neon-accent);
+            padding: 12px 30px;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            display: inline-block;
+        }
+        .btn-neon:hover {
+            background: var(--neon-accent);
+            color: var(--bg-dark);
+            box-shadow: 0 0 20px var(--neon-glow);
+        }
+        .btn-solid {
+            background: var(--neon-accent);
+            color: var(--bg-dark);
+            border: 1px solid var(--neon-accent);
+            padding: 12px 30px;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            text-decoration: none;
+            display: inline-block;
+            transition: 0.3s;
+        }
+        .btn-solid:hover {
+            background: transparent;
+            color: var(--neon-accent);
+            box-shadow: 0 0 20px var(--neon-glow);
+        }
+
+        /* --- SECCIONES COMUNES --- */
+        .section-title {
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin-bottom: 3rem;
+            text-transform: uppercase;
+            color: white;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+        .section-title::before {
+            content: "";
+            width: 50px;
+            height: 2px;
+            background-color: var(--neon-accent);
+        }
+
+        /* --- TARJETAS DE PROYECTOS --- */
+        .project-card {
+            background-color: var(--bg-card);
+            border: 1px solid rgba(255,255,255,0.05);
+            padding: 30px;
+            height: 100%;
+            transition: 0.4s;
+            position: relative;
+            overflow: hidden;
+        }
+        .project-card::before {
+            content: "";
+            position: absolute;
+            top: 0; left: 0; width: 100%; height: 2px;
+            background: var(--neon-accent);
+            transform: scaleX(0);
+            transform-origin: left;
+            transition: 0.4s;
+        }
+        .project-card:hover {
+            transform: translateY(-10px);
+            border-color: rgba(0, 255, 102, 0.2);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+        }
+        .project-card:hover::before { transform: scaleX(1); }
+        .project-title { color: white; font-weight: 700; font-size: 1.5rem; margin-bottom: 15px; }
+        .tech-pill {
+            display: inline-block;
+            font-size: 0.75rem;
+            color: var(--bg-dark);
+            background-color: var(--neon-accent);
+            padding: 3px 10px;
+            border-radius: 50px;
+            font-weight: 600;
+            margin-right: 5px;
+            margin-bottom: 10px;
+        }
+
+        /* --- STACK SECTION --- */
+        .stack-list { list-style: none; padding: 0; }
+        .stack-list li { margin-bottom: 15px; font-size: 1.1rem; display: flex; align-items: center; gap: 10px; }
+        .stack-list i { color: var(--neon-accent); }
+
+        /* --- FOOTER / CONTACTO --- */
+        .contact-box {
+            background: var(--bg-card);
+            border: 1px solid rgba(255,255,255,0.05);
+            padding: 50px;
+            text-align: center;
+        }
+        .social-links a {
+            color: var(--text-main);
+            font-size: 2rem;
+            margin: 0 15px;
+            transition: 0.3s;
+        }
+        .social-links a:hover {
+            color: var(--neon-accent);
+            transform: translateY(-5px);
+        }
+
+        @media (max-width: 768px) {
+            .hero-title { font-size: 3rem; }
+        }
+    </style>
 </head>
 <body>
 
-    <nav>
-        <div class="logo">VALENTINO<span>.DEV</span></div>
-        <ul class="nav-links">
-            <li><a href="#hero">Inicio</a></li>
-            <li><a href="#halfvibe" style="color: #00f2ff;">Jugar HalfVibe</a></li>
-            <li><a href="#projects">Proyectos</a></li>
-            <li><a href="#contact">Contacto</a></li>
-        </ul>
+    <nav class="navbar navbar-expand-lg fixed-top py-3">
+        <div class="container">
+            <a class="navbar-brand" href="#">VALENTINO<span>_</span></a>
+            <button class="navbar-toggler border-0" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <i class="fa-solid fa-bars text-light"></i>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item"><a class="nav-link" href="#inicio">Inicio</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#proyectos">Arsenal</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#sobre-mi">Stack</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#contacto">Contacto</a></li>
+                </ul>
+            </div>
+        </div>
     </nav>
 
-    <section id="hero" class="hero">
-        <div class="hero-content">
-            <span class="badge">OPEN TO WORK</span>
-            <h1>Hola, soy <span class="highlight">Valentino Ciancio</span></h1>
-            <h2>Full Stack Developer & AI Engineer</h2>
-            <p>Especialista en desarrollo web moderno, soluciones para PyMEs y motores de físicas en el navegador.</p>
-            <div class="cta-buttons">
-                <a href="#halfvibe" class="btn primary">Probar mi Motor de Físicas</a>
-                <a href="#projects" class="btn secondary">Ver Clientes</a>
-            </div>
-        </div>
-    </section>
-
-    <section id="halfvibe" class="halfvibe-section">
+    <section id="inicio" class="hero">
         <div class="container">
-            <div class="section-title">
-                <span class="subtitle-badge">PROYECTO DESTACADO</span>
-                <h2>🚀 HalfVibe: Physics Engine</h2>
-                <p>Motor de físicas estilo "Source" corriendo en el navegador. <br>Incluye base de datos en tiempo real y leaderboard global.</p>
-            </div>
-            <div class="game-console">
-                <div class="server-status"><span class="dot"></span> LIVE SERVER (PythonAnywhere)</div>
-                <iframe src="https://lvekko.pythonanywhere.com" title="HalfVibe Game" allow="pointer-lock" loading="lazy"></iframe>
-            </div>
-            <div class="game-info">
-                <div class="tech-stack">
-                    <span class="tech-pill"><i class="fa-brands fa-python"></i> Flask</span>
-                    <span class="tech-pill"><i class="fa-brands fa-js"></i> Three.js</span>
-                    <span class="tech-pill"><i class="fa-solid fa-database"></i> SQLite</span>
-                </div>
-                <a href="https://lvekko.pythonanywhere.com" target="_blank" class="btn-fullscreen">
-                    Jugar en Pantalla Completa <i class="fa-solid fa-arrow-up-right-from-square"></i>
-                </a>
-            </div>
-        </div>
-    </section>
-
-    <section id="projects" class="projects">
-        <h2>Proyectos y Clientes</h2>
-        <div class="grid">
-            <div class="card">
-                <div class="card-img-container"><img src="static/indumar.jpg" alt="Indumar Web"></div>
-                <div class="card-content">
-                    <h3>INDUMAR Ingeniería</h3>
-                    <p>Sitio web corporativo para empresa de mantenimiento industrial.</p>
-                    <div class="tags"><span>HTML5</span><span>CSS3</span><span>JS</span></div>
-                </div>
-            </div>
-
-            <div class="card">
-                <div class="card-img-container"><img src="static/sga.jpg" alt="SGA Web"></div>
-                <div class="card-content">
-                    <h3>SGA Fumigaciones</h3>
-                    <p>Landing page optimizada para conversión y contacto rápido.</p>
-                    <div class="tags"><span>Landing Page</span><span>UX/UI</span></div>
-                </div>
-            </div>
-
-            <div class="card" style="border-color: #00f2ff;">
-                <div class="card-icon-placeholder"><i class="fa-solid fa-robot"></i></div>
-                <div class="card-content">
-                    <h3>AI Assistant</h3>
-                    <p>Chatbot inteligente conectado al servidor en tiempo real.</p>
-                    <div class="tags"><span>Python API</span><span>IA</span></div>
-                    <button onclick="toggleChat()" class="btn-card" style="width:100%; border:none; cursor:pointer;">Abrir Chat</button>
+            <div class="row">
+                <div class="col-lg-8">
+                    <p class="text-uppercase mb-2" style="color: var(--neon-accent); letter-spacing: 2px; font-weight: 600;">Desarrollador Backend & Frontend</p>
+                    <h1 class="hero-title">Escribo código.<br>Construyo <span>soluciones.</span></h1>
+                    <p class="hero-subtitle mb-5">
+                        Transformo ideas en sistemas eficientes. Especializado en desarrollo Full-Stack, optimización de rendimiento y automatización de procesos, con base en Luján, Buenos Aires.
+                    </p>
+                    <div class="d-flex gap-3 flex-wrap">
+                        <a href="#proyectos" class="btn-solid">Ver mi arsenal</a>
+                        <a href="#contacto" class="btn-neon">Hablemos de tu idea</a>
+                    </div>
                 </div>
             </div>
         </div>
     </section>
 
-    <div id="chat-window" class="chat-window hidden">
-        <div class="chat-header">
-            <span>Asistente Valentino</span>
-            <button onclick="toggleChat()" class="close-chat">X</button>
-        </div>
-        <div id="chat-messages" class="chat-messages">
-            <div class="message bot">Hola 👋 Soy la IA de Valen. ¿En qué te ayudo?</div>
-        </div>
-        <div class="chat-input-area">
-            <input type="text" id="user-input" placeholder="Escribí acá..." onkeypress="handleEnter(event)">
-            <button onclick="sendMessage()"><i class="fa-solid fa-paper-plane"></i></button>
-        </div>
-    </div>
+    <section id="proyectos" class="py-5 my-5">
+        <div class="container">
+            <h2 class="section-title">El Arsenal</h2>
+            <div class="row g-4">
+                
+                <div class="col-lg-4 col-md-6">
+                    <div class="project-card">
+                        <div class="mb-3">
+                            <span class="tech-pill">JavaScript</span>
+                            <span class="tech-pill">HTML/CSS</span>
+                            <span class="tech-pill">E-commerce</span>
+                        </div>
+                        <h3 class="project-title">LV Tech</h3>
+                        <p class="text-muted">Sistema de catálogo interactivo para servicio técnico de hardware. Incluye lógica de carrito de compras 100% en JS puro e integración directa de pedidos hacia WhatsApp, evitando plataformas pagas a terceros.</p>
+                        <a href="#" class="text-decoration-none mt-3 d-inline-block" style="color: var(--neon-accent); font-weight: 600;">
+                            Ver Proyecto <i class="fa-solid fa-arrow-right ms-2"></i>
+                        </a>
+                    </div>
+                </div>
 
-    <a href="https://wa.me/5492323357985" class="whatsapp-float" target="_blank">
-        <i class="fa-brands fa-whatsapp"></i>
-    </a>
+                <div class="col-lg-4 col-md-6">
+                    <div class="project-card">
+                        <div class="mb-3">
+                            <span class="tech-pill">Game Dev</span>
+                            <span class="tech-pill">Lógica Dura</span>
+                            <span class="tech-pill">HTML5 Canvas</span>
+                        </div>
+                        <h3 class="project-title">Half Vibe (Minecraft Clone)</h3>
+                        <p class="text-muted">Desarrollo de mecánicas de juego en entorno web. Este proyecto demuestra resolución de problemas complejos, manejo de físicas, colisiones y renderizado en tiempo real, superando las limitaciones del diseño web estático.</p>
+                        <a href="#" class="text-decoration-none mt-3 d-inline-block" style="color: var(--neon-accent); font-weight: 600;">
+                            Ver Proyecto <i class="fa-solid fa-arrow-right ms-2"></i>
+                        </a>
+                    </div>
+                </div>
 
-    <footer id="contact">
-        <h2>¿Tenés un proyecto?</h2>
-        <div class="socials">
-            <a href="https://www.linkedin.com/in/valentino-ciancio-443a163a8/" target="_blank"><i class="fa-brands fa-linkedin"></i> LinkedIn</a>
-            <a href="mailto:ekkito27@gmail.com"><i class="fa-solid fa-envelope"></i> Email</a>
+                <div class="col-lg-4 col-md-12">
+                    <div class="project-card">
+                        <div class="mb-3">
+                            <span class="tech-pill">Frontend</span>
+                            <span class="tech-pill">Backend</span>
+                            <span class="tech-pill">Bases de Datos</span>
+                        </div>
+                        <h3 class="project-title">Proyectos Académicos (UTN)</h3>
+                        <p class="text-muted">Recopilación de aplicaciones full-stack desarrolladas durante mi formación en la Universidad Tecnológica Nacional. Enfoque en arquitectura limpia, conexiones a bases de datos y creación de APIs robustas.</p>
+                        <a href="#" class="text-decoration-none mt-3 d-inline-block" style="color: var(--neon-accent); font-weight: 600;">
+                            Ver Repositorio <i class="fa-solid fa-arrow-right ms-2"></i>
+                        </a>
+                    </div>
+                </div>
+
+            </div>
         </div>
-        <p class="copyright">© 2026 Valentino Ciancio.</p>
+    </section>
+
+    <section id="sobre-mi" class="py-5 bg-black">
+        <div class="container py-5">
+            <div class="row align-items-center">
+                <div class="col-lg-6 mb-5 mb-lg-0">
+                    <h2 class="section-title">Ingeniería & Seguridad</h2>
+                    <p class="text-muted mb-4 fs-5">
+                        Con una sólida base forjada en la <strong>UTN</strong>, domino tanto el diseño Frontend como la lógica dura del Backend. No me conformo con que el código "simplemente funcione"; construyo sistemas escalables y limpios.
+                    </p>
+                    <p class="text-muted mb-4 fs-5">
+                        Actualmente cursando el Certificado Profesional en <strong>Ciberseguridad de Google</strong>. Mi filosofía es clara: pensar en la protección de los datos y prevenir vulnerabilidades desde la primera línea de código, no como un parche de última hora.
+                    </p>
+                </div>
+                <div class="col-lg-5 offset-lg-1">
+                    <div class="project-card border-0" style="background: rgba(20,20,20,0.8);">
+                        <h4 class="text-white mb-4">Core Stack</h4>
+                        <ul class="stack-list">
+                            <li><i class="fa-solid fa-code"></i> Frontend (HTML, CSS, JavaScript, Bootstrap)</li>
+                            <li><i class="fa-solid fa-server"></i> Backend & Lógica Estructural</li>
+                            <li><i class="fa-solid fa-database"></i> Gestión de Bases de Datos</li>
+                            <li><i class="fa-solid fa-shield-halved"></i> Principios de Ciberseguridad</li>
+                            <li><i class="fa-brands fa-git-alt"></i> Control de Versiones (Git)</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="contacto" class="py-5 my-5">
+        <div class="container">
+            <div class="contact-box mx-auto" style="max-width: 800px;">
+                <h2 class="text-white fw-bold mb-3">¿Iniciamos un sistema nuevo?</h2>
+                <p class="text-muted mb-5">Ya sea para un trabajo freelance, una entrevista técnica o charlar sobre seguridad informática, mis canales están abiertos.</p>
+                
+                <div class="d-flex justify-content-center gap-4 mb-5 flex-wrap">
+                    <a href="https://wa.me/5492323357985" target="_blank" class="btn-solid">
+                        <i class="fa-brands fa-whatsapp ms-2"></i> Mensaje Directo
+                    </a>
+                </div>
+
+                <div class="social-links">
+                    <a href="https://www.instagram.com/valentino_ciancio/" target="_blank" title="Instagram"><i class="fa-brands fa-instagram"></i></a>
+                    <a href="#" target="_blank" title="LinkedIn (¡Agregá tu link acá!)"><i class="fa-brands fa-linkedin-in"></i></a>
+                    <a href="#" target="_blank" title="GitHub"><i class="fa-brands fa-github"></i></a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer class="py-4 text-center border-top" style="border-color: rgba(255,255,255,0.05) !important;">
+        <p class="text-muted small mb-0">© 2026 Valentino Ciancio. Luján, Buenos Aires. Todos los derechos reservados.</p>
     </footer>
 
-    <script>
-        function toggleChat() {
-            document.getElementById('chat-window').classList.toggle('hidden');
-        }
-
-        function handleEnter(e) {
-            if (e.key === 'Enter') sendMessage();
-        }
-
-        async function sendMessage() {
-            const input = document.getElementById('user-input');
-            const messages = document.getElementById('chat-messages');
-            const msg = input.value;
-            if (!msg) return;
-
-            // Mostrar mensaje usuario
-            messages.innerHTML += `<div class="message user">${msg}</div>`;
-            input.value = '';
-            messages.scrollTop = messages.scrollHeight;
-
-            // Conectar con PythonAnywhere
-            try {
-                const response = await fetch('https://lvekko.pythonanywhere.com/api/chat', {
-                    method: 'POST',
-                    headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify({ message: msg })
-                });
-                const data = await response.json();
-                
-                // Mostrar respuesta IA
-                messages.innerHTML += `<div class="message bot">${data.reply}</div>`;
-            } catch (error) {
-                messages.innerHTML += `<div class="message bot" style="color:red">Error: El servidor no responde.</div>`;
-            }
-            messages.scrollTop = messages.scrollHeight;
-        }
-    </script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>
